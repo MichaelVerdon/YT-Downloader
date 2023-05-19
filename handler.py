@@ -4,11 +4,12 @@ from pytube import YouTube
 
 class Handler:
 
-    def __init__(self, link):
+    def __init__(self, link, root):
         self.link = link
         self.id = link.split("=")[1]
         self.img = f"https://img.youtube.com/vi/{self.id}/default.jpg"
         self.yt = YouTube(self.link)
+        self.root = root
 
     def getThumbnail(self):
         return BytesIO(requests.get(self.img).content)

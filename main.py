@@ -26,7 +26,7 @@ def search(url):
 
     if urlValid:
         try:
-            handler = Handler(url)
+            handler = Handler(url, root)
             image = ImageTk.PhotoImage(Image.open(handler.getThumbnail()))
             display = tk.Label(root, image=image)
             display.image = image # reference to stop garbage collection
@@ -35,17 +35,12 @@ def search(url):
             videoVal = tk.Label(root, text="Video Found!!", font="Arial 14")
             videoVal.place(relx=0.5, rely=0.35)
 
-            searchButton.destroy()
-
             # Init download options
             downloadAudioButton = tk.Button(root, height=1, width=15, text="Download Audio", font="Arial 14", command=lambda: handler.downloadAudio())
             downloadAudioButton.place(relx=0.4,rely=0.7)
             downloadVideoButton = tk.Button(root, height=1, width=15, text="Download Video", font="Arial 14", command=lambda: handler.downloadVideo())
             downloadVideoButton.place(relx=0.6,rely=0.7)
 
-            # Start again Button
-            searchAgainButton = tk.Button(root, height=1, width=7, text="Try Again", font="Arial 14", command=lambda: print("3"))
-            searchAgainButton.place(relx=0.875,rely=0.5)
         except:
             displayError()
     else:
